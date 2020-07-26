@@ -6,6 +6,9 @@ from django.views.generic import View, ListView, DetailView, CreateView, UpdateV
 
 from .forms import CommentForm, PostForm
 from .models import Post, Author, PostView
+
+from projects.models import Project
+
 from marketing.forms import EmailSignupForm
 from marketing.models import Signup
 
@@ -64,7 +67,7 @@ class IndexView(View):
     form = EmailSignupForm()
 
     def get(self, request, *args, **kwargs):
-        featured = Post.objects.filter(featured=True)
+        featured = Project.objects.filter(featured=True)
         latest = Post.objects.order_by('-timestamp')[0:3]
         context = {
             'object_list': featured,
@@ -82,30 +85,12 @@ class IndexView(View):
         return redirect("home")
 
 
-def index(request):
-    featured = Post.objects.filter(featured=True)
-    latest = Post.objects.order_by('-timestamp')[0:3]
-
-    if request.method == "POST":
-        email = request.POST["email"]
-        new_signup = Signup()
-        new_signup.email = email
-        new_signup.save()
-
-    context = {
-        'object_list': featured,
-        'latest': latest,
-        'form': form
-    }
-    return render(request, 'index.html', context)
-
-
 class PostListView(ListView):
     form = EmailSignupForm()
     model = Post
     template_name = 'blog.html'
     context_object_name = 'queryset'
-    paginate_by = 1
+    paginate_by = 4
 
     def get_context_data(self, **kwargs):
         category_count = get_category_count()
@@ -175,14 +160,14 @@ class PostDetailView(DetailView):
             form.instance.post = post
             form.save()
             return redirect(reverse("post-detail", kwargs={
-                'pk': post.pk
+                'slug': post.slug
             }))
 
 
-def post_detail(request, id):
+def post_detail(request, slug):
     category_count = get_category_count()
     most_recent = Post.objects.order_by('-timestamp')[:3]
-    post = get_object_or_404(Post, id=id)
+    post = get_object_or_404(Post, slug=slug)
 
     if request.user.is_authenticated:
         PostView.objects.get_or_create(user=request.user, post=post)
@@ -194,7 +179,7 @@ def post_detail(request, id):
             form.instance.post = post
             form.save()
             return redirect(reverse("post-detail", kwargs={
-                'id': post.pk
+                'slug': post.slug
             }))
     context = {
         'post': post,
@@ -219,7 +204,7 @@ class PostCreateView(CreateView):
         form.instance.author = get_author(self.request.user)
         form.save()
         return redirect(reverse("post-detail", kwargs={
-            'pk': form.instance.pk
+            'slug': form.instance.slug
         }))
 
 
@@ -232,7 +217,7 @@ def post_create(request):
             form.instance.author = author
             form.save()
             return redirect(reverse("post-detail", kwargs={
-                'id': form.instance.id
+                'slug': form.instance.slug
             }))
     context = {
         'title': title,
@@ -255,13 +240,13 @@ class PostUpdateView(UpdateView):
         form.instance.author = get_author(self.request.user)
         form.save()
         return redirect(reverse("post-detail", kwargs={
-            'pk': form.instance.pk
+            'slug': form.instance.slug
         }))
 
 
-def post_update(request, id):
+def post_update(request, slug):
     title = 'Update'
-    post = get_object_or_404(Post, id=id)
+    post = get_object_or_404(Post, slug=slug)
     form = PostForm(
         request.POST or None,
         request.FILES or None,
@@ -272,7 +257,7 @@ def post_update(request, id):
             form.instance.author = author
             form.save()
             return redirect(reverse("post-detail", kwargs={
-                'id': form.instance.id
+                'slug': form.instance.slug
             }))
     context = {
         'title': title,
@@ -287,7 +272,7 @@ class PostDeleteView(DeleteView):
     template_name = 'post_confirm_delete.html'
 
 
-def post_delete(request, id):
-    post = get_object_or_404(Post, id=id)
+def post_delete(request, slug):
+    post = get_object_or_404(Post, slug=slug)
     post.delete()
     return redirect(reverse("post-list"))

@@ -1,34 +1,39 @@
 from django.db import models
-from posts.models import Category
+from posts.models import Category, Post
+from django.contrib.auth import get_user_model
+from django.urls import reverse
 # Create your models here.
+User = get_user_model()
 
 
 class Project(models.Model):
     title = models.CharField(max_length=100)
     overview = models.TextField()
     timestamp = models.DateTimeField(auto_now_add=True)
-    # content = HTMLField()
-    # comment_count = models.IntegerField(default = 0)
-    # view_count = models.IntegerField(default = 0)
-    # author = models.ForeignKey(Author, on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, on_delete=models.SET_NULL, blank=True, null=True)
+    view_count = models.IntegerField(default=0)
     thumbnail = models.ImageField()
     categories = models.ManyToManyField(Category)
     featured = models.BooleanField()
+    slug = models.SlugField()
+
+    # check the below
+    # creator = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.title
 
     def get_absolute_url(self):
         return reverse('project-detail', kwargs={
-            'pk': self.pk
+            'slug': self.slug
         })
 
     def get_update_url(self):
         return reverse('project-update', kwargs={
-            'pk': self.pk
+            'slug': self.slug
         })
 
     def get_delete_url(self):
         return reverse('project-delete', kwargs={
-            'pk': self.pk
+            'slug': self.slug
         })

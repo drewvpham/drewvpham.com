@@ -12,6 +12,11 @@ Bootstrap Temple Blog Template
 * GENERAL
 * =====================
 */
+
+img {
+transform: rotate(90deg);
+}
+
 .text-bold {
   font-weight: 700;
 }
