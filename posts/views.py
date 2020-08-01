@@ -131,6 +131,7 @@ class PostDetailView(DetailView):
     model = Post
     template_name = 'post.html'
     context_object_name = 'post'
+    query_pk_and_slug = True
     form = CommentForm()
 
     def get_object(self):

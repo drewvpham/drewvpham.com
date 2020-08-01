@@ -15,7 +15,7 @@ colorama==0.4.3
 colorclass==2.2.0
 cryptography==3.0
 defusedxml==0.6.0
-Django==2.1.1
+Django==2.1
 django-allauth==0.42.0
 django-crispy-forms==1.9.2
 django-tinymce4-lite==1.8.0

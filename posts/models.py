@@ -1,8 +1,8 @@
-from tinymce import HTMLField
+from tinymce.models import HTMLField
 from django.db import models
 from django.contrib.auth import get_user_model
 from django.urls import reverse
-
+from django.utils.text import slugify
 User = get_user_model()
 
 
@@ -86,3 +86,8 @@ class Post(models.Model):
     @property
     def view_count(self):
         return PostView.objects.filter(post=self).count()
+
+    def save(self, *args, **kwargs):
+        value = self.title
+        self.slug = slugify(value, allow_unicode=True)
+        super().save(*args, **kwargs)
