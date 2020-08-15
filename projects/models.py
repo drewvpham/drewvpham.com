@@ -16,7 +16,7 @@ class Project(models.Model):
     categories = models.ManyToManyField(Category)
     featured = models.BooleanField()
     slug = models.SlugField()
-    url = models.CharField(max_length=30)
+    url = models.CharField(max_length=50)
 
     # check the below
     # creator = models.ForeignKey(User, on_delete=models.CASCADE)
