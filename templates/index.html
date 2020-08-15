@@ -40,7 +40,7 @@
 <section class="featured-posts no-padding-top">
     <div class="container">
         <header>
-            <h2>Some of my work</h2>
+            <h2 class="mb-4">Some of my work</h2>
         </header>
         <!-- Post-->
         <div class='row'>
@@ -97,10 +97,9 @@
 <section class="featured-posts no-padding-top">
     <div class="container">
         <header>
-            <h2>Latest blog updates</h2>
+            <h2 class="mb-4">Latest blog updates</h2>
         </header>
         <!-- Post-->
-        <div class='row'>
             {% for obj in latest %}
             <div class="row d-flex align-items-stretch">
                 {% if not forloop.first and not forloop.last %}
@@ -153,7 +152,6 @@
             </div>
             {% endfor %}
 
-        </div>
     </div>
 </section>
 

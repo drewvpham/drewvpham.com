@@ -23,7 +23,6 @@
       <div class="row">
           {% for project in object_list %}
           <div class="col-md-4 d-flex align-items-stretch">
-              {# d-flex align-items #}
             <div class="card mb-4 shadow-sm d-flex">
                 {% if project.thumbnail%}
                     <img src="{{ project.thumbnail.url }}" alt="..." class="card-img-top">
