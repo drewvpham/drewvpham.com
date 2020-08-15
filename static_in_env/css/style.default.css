@@ -21,6 +21,7 @@ transform: rotate(90deg);
     height: 15vw;
     object-fit: cover;
 }
+
 .text-bold {
   font-weight: 700;
 }

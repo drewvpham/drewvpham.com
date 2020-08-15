@@ -45,13 +45,13 @@
         <!-- Post-->
         <div class='row'>
             {% for project in object_list %}
-            <div class="col-md-4 d-flex align-items">
+            <div class="col-md-4 d-flex align-items-stretch">
                 {# d-flex align-items #}
-                <div class="card mb-4 shadow-sm">
+                <div class="card mb-4 shadow-sm d-flex">
                     {% if project.thumbnail%}
-                    <img src="{{ project.thumbnail.url }}" alt="..." class="img-responsive" width="100%" height="225">
+                    <img src="{{ project.thumbnail.url }}" alt="..." class="img-responsive card-img-top">
                     {% else %}
-                    <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: No Image Available">
+                    <svg class="bd-placeholder-img card-img-top" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: No Image Available">
                         <title>Placeholder</title>
                         <rect width="100%" height="100%" fill="#55595c" /><text x="20%" y="50%" fill="#eceeef" dy=".3em">No Image Available</text>
                     </svg>
@@ -62,12 +62,17 @@
                     <div class="card-body">
                         <h5>{{project.title}}</h2>
                             <p class="card-text">{{project.overview}}</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">Visit Site</button>
+                            <div class="d-flex justify-content-between">
 
-                                    <a class="btn btn-primary-outline" href="{{project.url}}" role="button">Link</a>
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">Read post</button>
+
+                                <div class="btn-group">
+                                    {% if project.post %}
+                                    <a href="{{project.url}}" target="_blank" class="float-left btn btn-outline-secondary btn-sm" role="button">Visit Site</a>
+                                            {% endif %}
+
+                                  {% if project.post %}
+                                  <a href="{{project.post.get_absolute_url}}" class="float-right btn btn-outline-info btn-sm" role="button">Read Post</a>
+                                            {% endif %}
                                 </div>
 
                             </div>

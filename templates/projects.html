@@ -13,7 +13,7 @@
       <p class="lead text-muted">Welcome to my project portfolio! I am constantly experimenting with new technologies. Please feel free to recommend one of your favorites or even suggest a project.</p>
       <p>
 
-        <a href="mailto:drewvpham@gmail.com" target="_blank" class="btn btn-info">Get in touch!</a>
+        <a href="mailto:drewvpham@gmail.com" target="_blank" class="btn btn-primary">Get in touch!</a>
       </p>
     </div>
   </section>
@@ -22,20 +22,20 @@
     <div class="container">
       <div class="row">
           {% for project in object_list %}
-          <div class="col-md-4">
+          <div class="col-md-4 d-flex align-items-stretch">
               {# d-flex align-items #}
-            <div class="card mb-4 shadow-sm d-flex align-items-center">
+            <div class="card mb-4 shadow-sm d-flex">
                 {% if project.thumbnail%}
-                    <img src="{{ project.thumbnail.url }}" alt="..." class="card-img-top ">
+                    <img src="{{ project.thumbnail.url }}" alt="..." class="card-img-top">
                      {% else %}
 
-                  <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: No Image Available"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="20%" y="50%" fill="#eceeef" dy=".3em">No Image Available</text></svg>
+                  <svg class="bd-placeholder-img card-img-top" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: No Image Available"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="20%" y="50%" fill="#eceeef" dy=".3em">No Image Available</text></svg>
                       {% endif %}
 
               <div class="card-body">
                   <h5>{{project.title}}</h2>
                 <p class="card-text">{{project.overview}}</p>
-                <div class="d-flex justify-content-between align-items-center">
+                <div class="d-flex justify-content-between">
                   <div class="btn-group">
                       {% if project.post %}
                       <a href="{{project.url}}" target="_blank" class="float-left btn btn-outline-secondary btn-sm" role="button">Visit Site</a>
