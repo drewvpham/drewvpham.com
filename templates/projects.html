@@ -36,9 +36,10 @@
                 <p class="card-text">{{project.overview}}</p>
                 <div class="d-flex justify-content-between">
                   <div class="btn-group">
-                      {% if project.post %}
+                      {% if project.url %}
                       <a href="{{project.url}}" target="_blank" class="float-left btn btn-outline-secondary btn-sm" role="button">Visit Site</a>
-                              {% endif %}
+                      {% endif %}
+                
 
                     {% if project.post %}
                     <a href="{{project.post.get_absolute_url}}" class="float-right btn btn-outline-info btn-sm" role="button">Read Post</a>

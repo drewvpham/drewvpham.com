@@ -17,6 +17,7 @@ class Project(models.Model):
     featured = models.BooleanField()
     slug = models.SlugField()
     url = models.CharField(max_length=50)
+    gitlab = models.CharField(max_length=50)
 
     # check the below
     # creator = models.ForeignKey(User, on_delete=models.CASCADE)
