@@ -33,7 +33,8 @@ INSTALLED_APPS = [
     'tinymce',
     'marketing',
     'posts',
-    'projects'
+    'projects',
+
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
