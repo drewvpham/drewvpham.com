@@ -11,13 +11,13 @@ class Project(models.Model):
     overview = models.TextField()
     timestamp = models.DateTimeField(auto_now_add=True)
     post = models.ForeignKey(Post, on_delete=models.SET_NULL, blank=True, null=True)
-    view_count = models.IntegerField(default=0)
-    thumbnail = models.ImageField()
+    view_count = models.IntegerField(default=0, blank=True)
+    thumbnail = models.ImageField(blank=True)
     categories = models.ManyToManyField(Category)
     featured = models.BooleanField()
     slug = models.SlugField()
-    url = models.CharField(max_length=50)
-    gitlab = models.CharField(max_length=50)
+    url = models.CharField(max_length=50, blank=True)
+    github = models.CharField(max_length=50, blank=True)
 
     # check the below
     # creator = models.ForeignKey(User, on_delete=models.CASCADE)

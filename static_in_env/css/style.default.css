@@ -1003,7 +1003,7 @@ section.newsletter .submit {
 */
 section.gallery .mix {
   padding: 0;
-  max-height: 350px;
+  max-height: 250px;
   overflow: hidden;
 }
 

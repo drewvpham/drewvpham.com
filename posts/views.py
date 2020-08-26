@@ -5,7 +5,7 @@ from django.shortcuts import render, get_object_or_404, redirect, reverse
 from django.views.generic import View, ListView, DetailView, CreateView, UpdateView, DeleteView
 
 from .forms import CommentForm, PostForm
-from .models import Post, Author, PostView
+from .models import Post, Author, PostView, Category
 
 from projects.models import Project
 
@@ -25,40 +25,74 @@ def get_author(user):
 class SearchView(View):
     def get(self, request, *args, **kwargs):
         queryset = Post.objects.all()
+        category = Category.objects.all()
         query = request.GET.get('q')
         if query:
             queryset = queryset.filter(
                 Q(title__icontains=query) |
                 Q(overview__icontains=query)
             ).distinct()
+            category_query = category.filter(
+                Q(title__icontains=query)
+            ).distinct()
+            queryset.append(category_query)
         context = {
-            'queryset': queryset
+            'queryset': queryset,
+            'query': query
         }
+        print(context)
         return render(request, 'search_results.html', context)
 
 
 def search(request):
-    queryset = Post.objects.all()
+    project_set = Project.objects.all()
     query = request.GET.get('q')
     if query:
-        queryset = queryset.filter(
+        post_set = Post.objects.all().filter(
             Q(title__icontains=query) |
-            Q(overview__icontains=query)
+            Q(overview__icontains=query) |
+            Q(categories__title__icontains=query)
         ).distinct()
+
+        project_set = Project.objects.all().filter(
+            Q(title__icontains=query) |
+            Q(overview__icontains=query) |
+            Q(categories__title__icontains=query)
+        ).distinct()
+
     context = {
-        'queryset': queryset
+        'query': query,
+        'post_set': post_set,
+        'project_set': project_set
     }
+    print(context)
     return render(request, 'search_results.html', context)
+
+
+class CategorySearchView(View):
+    def get(self, request, *args, **kwargs):
+        slug = self.kwargs['slug']
+        post_set = Post.objects.filter(categories__slug=slug)
+        project_set = Project.objects.filter(categories__slug=slug)
+
+        context = {
+            'query': slug,
+            'post_set': post_set,
+            'project_set': project_set
+        }
+        print(context)
+        return render(request, 'search_results.html', context)
 
 
 def resume(request):
     return render(request, 'resume.html')
 
 
-def get_category_count():
-    queryset = Post \
+def get_category_count(model=Post):
+    print(model)
+    queryset = model \
         .objects \
-        .values('categories__title') \
+        .values('categories__title', 'categories__slug') \
         .annotate(Count('categories__title'))
     return queryset
 
