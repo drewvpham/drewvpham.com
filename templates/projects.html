@@ -43,18 +43,18 @@
 
 
        <div class="card-footer">
-          <div class="mt-auto btn-group role="group"">
+          <div class="mt-auto btn-group" role="group">
               {% if project.url %}
-              <a href="{{project.url}}" target="_blank" class="float-left btn btn-outline-secondary btn-sm" role="button">Visit Site</a>
+              <a href="{{project.url}}" target="_blank" class="small btn btn-outline-secondary btn-sm" role="button">Visit Site</a>
               {% endif %}
 
               {% if project.github %}
-              <a href="{{project.github}}" target="_blank" class="float-right btn btn-outline-info btn-sm" role="button">View Code</a>
+              <a href="{{project.github}}" target="_blank" class="small btn btn-outline-info btn-sm" role="button">View Code</a>
            {% endif %}
 
 
             {% if project.post %}
-            <a href="{{project.post.get_absolute_url}}" class="float-right btn btn-outline-warning btn-sm" role="button">Read Post</a>
+            <a href="{{project.post.get_absolute_url}}" class="small btn btn-outline-warning btn-sm" role="button">Read Post</a>
          {% endif %}
           </div>
               </div>
