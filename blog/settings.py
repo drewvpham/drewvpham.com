@@ -14,7 +14,7 @@ SECRET_KEY = 'k*b$$!%hiswnhp2pad)6(u4x_g)r5w%@&zlv&@2hrz4#f3+#57'
 DEBUG = False
 
 ALLOWED_HOSTS = ['127.0.0.1', '3.222.247.173', 'drewvpham.com',
-                 'wwww.drewvpham.com', 'localhost', '35.175.192.170']
+                 'wwww.drewvpham.com', 'localhost']
 
 
 # Application definition
