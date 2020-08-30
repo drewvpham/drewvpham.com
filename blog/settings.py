@@ -13,7 +13,8 @@ SECRET_KEY = 'k*b$$!%hiswnhp2pad)6(u4x_g)r5w%@&zlv&@2hrz4#f3+#57'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1', '3.222.247.173', 'drewvpham.com', 'wwww.drewvpham.com', 'localhost']
+ALLOWED_HOSTS = ['127.0.0.1', '54.243.15.117', '3.222.247.173',
+                 'drewvpham.com', 'wwww.drewvpham.com', 'localhost']
 
 
 # Application definition
