@@ -4,8 +4,9 @@
 {% block content %}
     <div class="container">
 
-<div class='row'>
+
     {%if project_set %}
+    <div class='row'>
         <header>
             <h2>Project results for {{query}}:</h2>
         </header>
@@ -21,11 +22,13 @@
                 </tr>
                 {% endfor %}
               </tbody></table>
-            </div>
+        </div>
+    </div>
             {% endif %}
 
     <br />
 {%if post_set %}
+<div class='row'>
 <header>
     <h2>Post results for {{query}}:</h2>
 </header>
@@ -42,8 +45,9 @@
         {% endfor %}
       </tbody></table>
     </div>
-    {% endif %}
 </div>
+    {% endif %}
+
 </div>
 
 {% endblock %}
