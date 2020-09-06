@@ -16,10 +16,8 @@
             {% for project in project_set %}
                 <tr>
                   <td class="number text-center">{{forloop.counter}}</td>
-                  <td class="image"><a href="{{ project.get_absolute_url }}"><img src="{{ project.thumbnail.url }}" width=300 height=200 alt=""></a></td>
+                  <td class="image"><a href="{{ project.get_absolute_url }}"><img src="{{ project.thumbnail.url }}" width=300 height=200 alt="" class="img-fluid"></a></td>
                   <td class="product"><strong><a href="{{ project.get_absolute_url }}" >{{ project.title }}</a></strong><br>{{ project.overview }}</td>
-
-                  <td class="price text-right">$350</td>
                 </tr>
                 {% endfor %}
               </tbody></table>
@@ -38,10 +36,8 @@
     {% for post in post_set %}
         <tr>
           <td class="number text-center">{{forloop.counter}}</td>
-          <td class="image"><a href="{{ post.get_absolute_url }}"><img src="{{ post.thumbnail.url }}" width=300 height=200 alt=""></a></td>
+          <td class="image"><a href="{{ post.get_absolute_url }}"><img src="{{ post.thumbnail.url }}" width=300 height=200 alt="" class="img-fluid"></a></td>
           <td class="product"><strong><a href="{{ post.get_absolute_url }}" >{{ post.title }}</a></strong><br>{{ post.overview }}</td>
-          <td class="rate text-right"></td>
-          <td class="text-right">$350</td>
         </tr>
         {% endfor %}
       </tbody></table>
