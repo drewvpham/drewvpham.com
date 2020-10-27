@@ -13,7 +13,7 @@ cffi==1.14.1
 chardet==3.0.4
 colorama==0.4.3
 colorclass==2.2.0
-cryptography==3.0
+cryptography==3.2
 defusedxml==0.6.0
 Django==2.1
 django-allauth==0.42.0
